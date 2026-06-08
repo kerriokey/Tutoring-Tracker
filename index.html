@@ -359,6 +359,55 @@
     <button class="btn-danger" onclick="deleteSession()">Delete Session</button>
   </main>
  
+  <!-- EDIT VIEW -->
+  <main id="view-edit" class="hidden">
+    <h2 class="form-title">Edit Session</h2>
+    <div class="form-group">
+      <label class="field-label">Date &amp; Time</label>
+      <input type="datetime-local" id="edit-datetime" />
+    </div>
+    <div class="form-group">
+      <label class="field-label">Student Name <span class="optional">(optional)</span></label>
+      <input type="text" id="edit-student" placeholder="e.g. Alex" />
+    </div>
+    <div class="form-group">
+      <label class="field-label">Duration <span class="optional">(optional)</span></label>
+      <div class="input-group">
+        <input type="number" id="edit-duration" placeholder="e.g. 60" style="border:none;flex:1;padding:12px 0 12px 14px;width:auto;" />
+        <span style="padding:12px 14px 12px 4px;color:#8A7968;font-size:14px;">min</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">Session Fee</label>
+      <div class="input-group">
+        <span class="prefix">$</span>
+        <input type="number" id="edit-amount" placeholder="0.00" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">Tip <span class="optional">(optional)</span></label>
+      <div class="input-group">
+        <span class="prefix">$</span>
+        <input type="number" id="edit-tip" placeholder="0.00" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">Mileage <span class="optional">(optional)</span></label>
+      <div class="input-group">
+        <input type="number" id="edit-mileage" placeholder="0" style="border:none;flex:1;padding:12px 0 12px 14px;width:auto;" />
+        <span style="padding:12px 14px 12px 4px;color:#8A7968;font-size:14px;">mi</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">Payment Status</label>
+      <div class="toggle">
+        <button class="toggle-btn active" id="edit-toggle-unpaid" onclick="setEditPaid(false)">Unpaid</button>
+        <button class="toggle-btn" id="edit-toggle-paid" onclick="setEditPaid(true)">Paid</button>
+      </div>
+    </div>
+    <button class="btn-primary-full" onclick="saveEdit()">Save Changes</button>
+  </main>
+ 
   <!-- STATS VIEW -->
   <main id="view-stats" class="hidden">
     <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px">Stats &amp; Summary</h2>
@@ -426,7 +475,7 @@
  
   // --- VIEWS ---
   function showView(name) {
-    ['dashboard','add','detail','stats'].forEach(v => {
+    ['dashboard','add','detail','stats','edit'].forEach(v => {
       document.getElementById('view-' + v).classList.toggle('hidden', v !== name);
     });
     const isBack = name !== 'dashboard';
@@ -668,20 +717,70 @@
     // Actions
     const actions = document.getElementById('detail-actions');
     if (st === 'cancelled') {
-      actions.innerHTML = `<button class="btn-outline-green" onclick="reinstateSession()">Reinstate Session</button>`;
+      actions.innerHTML = `
+        <button class="btn-outline-green" onclick="reinstateSession()">Reinstate Session</button>
+        <button class="btn-outline-blue" onclick="openEdit()">Edit Session Details</button>`;
     } else if (st === 'upcoming') {
       actions.innerHTML = `
         <button class="btn-purple-full" onclick="markComplete()">✓ Mark Session Complete</button>
+        <button class="btn-outline-blue" onclick="openEdit()">Edit Session Details</button>
         <button class="btn-outline-red" onclick="openCancelModal()">Mark as Cancelled</button>`;
     } else {
       const paidLabel = s.paid ? 'Mark as Unpaid' : 'Mark as Paid ✓';
       const paidClass = s.paid ? 'btn-outline-amber' : 'btn-primary-full';
       actions.innerHTML = `
         <button class="${paidClass}" onclick="toggleDetailPaid()">${paidLabel}</button>
+        <button class="btn-outline-blue" onclick="openEdit()">Edit Session Details</button>
         <button class="btn-outline-red" onclick="openCancelModal()">Mark as Cancelled</button>`;
     }
  
     showView('detail');
+  }
+ 
+  // --- EDIT ---
+  let editPaid = false;
+  function openEdit() {
+    const s = sessions.find(x => x.id === selectedId);
+    if (!s) return;
+    document.getElementById('edit-datetime').value = s.datetime ? s.datetime.slice(0,16) : '';
+    document.getElementById('edit-student').value = s.student || '';
+    document.getElementById('edit-duration').value = s.duration || '';
+    document.getElementById('edit-amount').value = s.amount || '';
+    document.getElementById('edit-tip').value = s.tip || '';
+    document.getElementById('edit-mileage').value = s.mileage || '';
+    setEditPaid(s.paid || false);
+    showView('edit');
+  }
+ 
+  function setEditPaid(val) {
+    editPaid = val;
+    document.getElementById('edit-toggle-paid').classList.toggle('active', val);
+    document.getElementById('edit-toggle-unpaid').classList.toggle('active', !val);
+  }
+ 
+  function saveEdit() {
+    const datetime = document.getElementById('edit-datetime').value;
+    const amount = document.getElementById('edit-amount').value;
+    if (!datetime || !amount) { showToast('Date and amount are required.'); return; }
+    const idx = sessions.findIndex(s => s.id === selectedId);
+    if (idx === -1) return;
+    const s = sessions[idx];
+    const wasUpcoming = getStatus(s) === 'upcoming';
+    const nowUpcoming = !s.complete && !editPaid && new Date(datetime) > new Date();
+    sessions[idx] = {
+      ...s,
+      datetime,
+      student: document.getElementById('edit-student').value,
+      duration: document.getElementById('edit-duration').value,
+      amount,
+      tip: document.getElementById('edit-tip').value || '',
+      mileage: document.getElementById('edit-mileage').value || '',
+      paid: editPaid,
+      complete: editPaid ? true : (nowUpcoming ? false : s.complete),
+    };
+    save();
+    showToast('Session updated!');
+    openDetail(selectedId);
   }
  
   function markComplete() {
