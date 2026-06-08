@@ -190,6 +190,24 @@
     }
  
     .hidden { display: none !important; }
+ 
+    /* NOTES EDITING */
+    .notes-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .edit-notes-btn {
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      font-size: 12px; color: #D4A853; font-weight: 700; padding: 2px 0;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .notes-empty { font-size: 14px; color: #B0A090; font-style: italic; margin-top: 2px; }
+    .notes-edit-area { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .notes-edit-area textarea {
+      min-height: 100px; font-size: 14px; line-height: 1.6;
+    }
+    .notes-save-btn {
+      align-self: flex-end; padding: 8px 18px; background: #1C1917; color: #FAF7F2;
+      border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: inherit;
+    }
   </style>
 </head>
 <body>
@@ -298,8 +316,16 @@
         <span class="detail-value" id="detail-amount" style="font-weight:700"></span>
       </div>
       <div class="detail-notes" id="detail-notes-section">
-        <p class="detail-label">Notes</p>
+        <div class="notes-header">
+          <p class="detail-label" style="margin-bottom:0">Notes</p>
+          <button class="edit-notes-btn" id="edit-notes-btn" onclick="toggleNotesEdit()">Edit</button>
+        </div>
         <p class="notes-text" id="detail-notes"></p>
+        <p class="notes-empty hidden" id="detail-notes-empty">No notes yet — tap Edit to add some.</p>
+        <div class="notes-edit-area hidden" id="notes-edit-area">
+          <textarea id="notes-edit-input" placeholder="Session notes, goals, observations..." rows="4"></textarea>
+          <button class="notes-save-btn" onclick="saveNotes()">Save Notes</button>
+        </div>
       </div>
     </div>
     <button class="btn-primary-full" id="detail-paid-btn" onclick="toggleDetailPaid()"></button>
@@ -442,16 +468,55 @@
       studentRow.classList.add('hidden');
     }
     const notesSection = document.getElementById('detail-notes-section');
+    const notesText = document.getElementById('detail-notes');
+    const notesEmpty = document.getElementById('detail-notes-empty');
+    const notesEditArea = document.getElementById('notes-edit-area');
+    const editBtn = document.getElementById('edit-notes-btn');
+ 
+    notesSection.classList.remove('hidden');
+    notesEditArea.classList.add('hidden');
+    editBtn.textContent = 'Edit';
+ 
     if (s.notes) {
-      notesSection.classList.remove('hidden');
-      document.getElementById('detail-notes').textContent = s.notes;
+      notesText.textContent = s.notes;
+      notesText.classList.remove('hidden');
+      notesEmpty.classList.add('hidden');
     } else {
-      notesSection.classList.add('hidden');
+      notesText.classList.add('hidden');
+      notesEmpty.classList.remove('hidden');
     }
     const paidBtn = document.getElementById('detail-paid-btn');
     paidBtn.textContent = s.paid ? 'Mark as Unpaid' : 'Mark as Paid ✓';
     paidBtn.className = s.paid ? 'btn-outline-amber' : 'btn-primary-full';
     showView('detail');
+  }
+ 
+  function toggleNotesEdit() {
+    const editArea = document.getElementById('notes-edit-area');
+    const editBtn = document.getElementById('edit-notes-btn');
+    const isEditing = !editArea.classList.contains('hidden');
+ 
+    if (isEditing) {
+      // Cancel
+      editArea.classList.add('hidden');
+      editBtn.textContent = 'Edit';
+    } else {
+      // Open editor pre-filled with current notes
+      const s = sessions.find(x => x.id === selectedId);
+      document.getElementById('notes-edit-input').value = s ? (s.notes || '') : '';
+      editArea.classList.remove('hidden');
+      editBtn.textContent = 'Cancel';
+      setTimeout(() => document.getElementById('notes-edit-input').focus(), 50);
+    }
+  }
+ 
+  function saveNotes() {
+    const idx = sessions.findIndex(s => s.id === selectedId);
+    if (idx === -1) return;
+    sessions[idx].notes = document.getElementById('notes-edit-input').value.trim();
+    save();
+    showToast('Notes saved!');
+    openDetail(selectedId);
   }
  
   function toggleDetailPaid() {
