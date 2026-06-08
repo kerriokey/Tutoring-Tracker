@@ -17,22 +17,26 @@
     .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; }
     .logo { font-size: 22px; font-weight: 700; color: #FAF7F2; letter-spacing: -0.5px; }
     .back-btn { background: none; border: none; color: #D4A853; font-size: 16px; cursor: pointer; font-family: inherit; padding: 0; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
+    .export-btn { background: none; border: 1.5px solid rgba(255,255,255,0.25); color: #FAF7F2; border-radius: 20px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
     .rate-chip { background: #D4A853; color: #1C1917; border: none; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
  
     /* MAIN */
     main { padding: 20px 16px 100px; display: flex; flex-direction: column; gap: 12px; }
  
     /* SUMMARY CARDS */
-    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 4px; }
-    .card { border-radius: 14px; padding: 18px 16px; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+    .card { border-radius: 14px; padding: 16px 14px; cursor: default; }
     .card-green { background: #2D4A3E; color: #A8D5B5; }
     .card-amber { background: #4A3520; color: #D4A853; }
-    .card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; opacity: 0.8; }
-    .card-amount { font-size: 24px; font-weight: 700; }
+    .card-blue { background: #1E3A5F; color: #93C5FD; }
+    .card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; opacity: 0.8; }
+    .card-amount { font-size: 22px; font-weight: 700; }
+    .card-sub { font-size: 11px; opacity: 0.65; margin-top: 3px; }
  
     /* TABS */
-    .tabs { display: flex; gap: 6px; margin-bottom: 4px; }
-    .tab { flex: 1; padding: 8px 2px; border: 1.5px solid #D9D0C4; border-radius: 8px; background: none; font-size: 12px; cursor: pointer; font-family: inherit; color: #6B5E4F; }
+    .tabs { display: flex; gap: 5px; margin-bottom: 4px; flex-wrap: wrap; }
+    .tab { flex: 1; min-width: 60px; padding: 7px 2px; border: 1.5px solid #D9D0C4; border-radius: 8px; background: none; font-size: 11px; cursor: pointer; font-family: inherit; color: #6B5E4F; }
     .tab.active { background: #1C1917; color: #FAF7F2; border-color: #1C1917; }
  
     /* SESSION LIST */
@@ -44,6 +48,7 @@
       transition: opacity 0.1s, transform 0.1s;
     }
     .session-row.cancelled { background: #F5F0F0; border-color: #E8D8D8; opacity: 0.85; }
+    .session-row.upcoming { background: #F0F4FA; border-color: #C8D8EE; }
     .session-row:active { opacity: 0.7; transform: scale(0.99); }
     .row-left { flex: 1; padding-right: 12px; }
     .row-date { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
@@ -52,12 +57,18 @@
     .row-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
     .row-amount { font-size: 16px; font-weight: 700; }
     .row-amount.cancelled { text-decoration: line-through; color: #A09080; }
+    .row-amount.upcoming { color: #6B8EB5; }
  
     /* BADGES */
-    .badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
     .badge-paid { background: #D1FAE5; color: #065F46; }
     .badge-unpaid { background: #FEF3C7; color: #92400E; }
     .badge-cancelled { background: #FCE8E8; color: #9B2C2C; }
+    .badge-upcoming { background: #DBEAFE; color: #1E40AF; }
+    .badge-complete { background: #EDE9FE; color: #5B21B6; }
+ 
+    /* SECTION HEADERS in list */
+    .list-section-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #8A7968; padding: 4px 2px 2px; }
  
     /* EMPTY */
     .empty { text-align: center; padding-top: 60px; }
@@ -101,11 +112,14 @@
     .btn-outline-amber { width: 100%; padding: 15px; background: none; color: #92400E; border: 2px solid #D4A853; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px; }
     .btn-outline-red { width: 100%; padding: 15px; background: none; color: #9B2C2C; border: 2px solid #FCB8B8; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px; }
     .btn-outline-green { width: 100%; padding: 15px; background: none; color: #065F46; border: 2px solid #6EE7B7; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px; }
+    .btn-outline-blue { width: 100%; padding: 15px; background: none; color: #1E40AF; border: 2px solid #93C5FD; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px; }
+    .btn-purple-full { width: 100%; padding: 15px; background: #5B21B6; color: #FAF7F2; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px; }
     .btn-danger { width: 100%; padding: 15px; background: none; color: #B91C1C; border: 2px solid #FECACA; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px; }
  
     /* DETAIL */
     .detail-card { background: #fff; border-radius: 16px; padding: 20px; border: 1px solid #EDE8E0; display: flex; flex-direction: column; gap: 14px; }
     .detail-card.cancelled { background: #FDF5F5; border-color: #F0D8D8; }
+    .detail-card.upcoming { background: #F4F7FD; border-color: #C8D8EE; }
     .detail-header { display: flex; justify-content: space-between; align-items: flex-start; }
     .detail-date { font-size: 18px; font-weight: 700; }
     .detail-time { font-size: 13px; color: #8A7968; margin-top: 2px; }
@@ -124,15 +138,28 @@
     .notes-edit-area textarea { min-height: 100px; font-size: 14px; line-height: 1.6; }
     .notes-save-btn { align-self: flex-end; padding: 8px 18px; background: #1C1917; color: #FAF7F2; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
  
-    /* CANCEL MODAL */
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; }
-    .modal { background: #FAF7F2; border-radius: 18px; padding: 28px 24px; width: 100%; max-width: 320px; }
+    /* MODALS */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; display: flex; align-items: flex-end; justify-content: center; padding: 0; }
+    .modal { background: #FAF7F2; border-radius: 24px 24px 0 0; padding: 28px 24px 40px; width: 100%; max-width: 480px; }
     .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
     .modal-subtitle { font-size: 13px; color: #8A7968; margin-bottom: 16px; }
     .modal-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
     .btn-primary { padding: 11px 24px; background: #1C1917; color: #FAF7F2; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; }
     .btn-red { padding: 11px 24px; background: #9B2C2C; color: #FAF7F2; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; }
     .btn-ghost { padding: 11px 20px; background: none; color: #6B5E4F; border: none; font-size: 15px; cursor: pointer; font-family: inherit; }
+ 
+    /* STATS VIEW */
+    .stats-section { background: #fff; border-radius: 16px; padding: 20px; border: 1px solid #EDE8E0; display: flex; flex-direction: column; gap: 14px; }
+    .stats-title { font-size: 18px; font-weight: 700; }
+    .stats-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0EBE3; }
+    .stats-row:last-child { border-bottom: none; }
+    .stats-label { font-size: 14px; color: #6B5E4F; }
+    .stats-value { font-size: 15px; font-weight: 700; }
+    .month-block { display: flex; flex-direction: column; gap: 0; }
+    .month-header { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #8A7968; padding: 12px 0 6px; border-bottom: 1px solid #EDE8E0; }
+    .month-stat-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid #F8F4EF; color: #4A3F35; }
+    .month-stat-row:last-child { border-bottom: none; }
+    .month-stat-value { font-weight: 600; }
  
     /* TOAST */
     .toast {
@@ -148,6 +175,7 @@
       100% { opacity: 0; }
     }
     .hidden { display: none !important; }
+    .mileage-note { font-size: 11px; color: #B0A090; font-style: italic; }
   </style>
 </head>
 <body>
@@ -160,7 +188,8 @@
   <div class="overlay hidden" id="rate-modal">
     <div class="modal">
       <p class="modal-title">Set Hourly Rate</p>
-      <div class="input-group" style="margin-top:4px">
+      <p class="modal-subtitle">Auto-fills when adding new sessions</p>
+      <div class="input-group">
         <span class="prefix">$</span>
         <input type="number" id="rate-input" placeholder="0.00" />
       </div>
@@ -189,32 +218,32 @@
     <div class="header-inner">
       <span class="logo" id="header-logo">Sessions</span>
       <button class="back-btn hidden" id="back-btn" onclick="goBack()">← Back</button>
-      <button class="rate-chip" id="rate-chip" onclick="openRateModal()">Set rate</button>
+      <div class="header-right" id="header-right">
+        <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+        <button class="rate-chip" id="rate-chip" onclick="openRateModal()">Set rate</button>
+      </div>
     </div>
   </header>
  
   <!-- DASHBOARD VIEW -->
   <main id="view-dashboard">
-    <div class="cards">
-      <div class="card card-green">
-        <p class="card-label">Collected</p>
-        <p class="card-amount" id="total-collected">$0.00</p>
-      </div>
-      <div class="card card-amber">
-        <p class="card-label">Outstanding</p>
-        <p class="card-amount" id="total-outstanding">$0.00</p>
-      </div>
+    <div class="cards" id="summary-cards">
+      <!-- rendered by JS -->
     </div>
-    <div class="tabs">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:-4px">
+      <button onclick="showView('stats')" style="background:none;border:none;font-size:12px;color:#8A7968;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0">View stats & monthly breakdown →</button>
+    </div>
+    <div class="tabs" id="filter-tabs">
       <button class="tab active" id="tab-all" onclick="setFilter('all')">All</button>
+      <button class="tab" id="tab-upcoming" onclick="setFilter('upcoming')">Upcoming</button>
       <button class="tab" id="tab-unpaid" onclick="setFilter('unpaid')">Unpaid</button>
       <button class="tab" id="tab-paid" onclick="setFilter('paid')">Paid</button>
       <button class="tab" id="tab-cancelled" onclick="setFilter('cancelled')">Cancelled</button>
     </div>
     <div id="session-list" class="session-list"></div>
     <div id="empty-state" class="empty hidden">
-      <p class="empty-text">No sessions yet.</p>
-      <p class="empty-hint">Tap + to log your first session.</p>
+      <p class="empty-text">No sessions here.</p>
+      <p class="empty-hint">Tap + to log a session.</p>
     </div>
     <button class="fab" onclick="openAdd()">+</button>
   </main>
@@ -231,7 +260,14 @@
       <input type="text" id="form-student" placeholder="e.g. Alex" />
     </div>
     <div class="form-group">
-      <label class="field-label">Amount</label>
+      <label class="field-label">Duration <span class="optional">(optional)</span></label>
+      <div class="input-group">
+        <input type="number" id="form-duration" placeholder="e.g. 60" style="border:none;flex:1;padding:12px 0 12px 14px;width:auto;" />
+        <span style="padding:12px 14px 12px 4px;color:#8A7968;font-size:14px;">min</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">Session Fee</label>
       <div class="input-group">
         <span class="prefix">$</span>
         <input type="number" id="form-amount" placeholder="0.00" />
@@ -245,6 +281,13 @@
       </div>
     </div>
     <div class="form-group">
+      <label class="field-label">Mileage <span class="optional">(optional)</span></label>
+      <div class="input-group">
+        <input type="number" id="form-mileage" placeholder="0" style="border:none;flex:1;padding:12px 0 12px 14px;width:auto;" />
+        <span style="padding:12px 14px 12px 4px;color:#8A7968;font-size:14px;">mi</span>
+      </div>
+    </div>
+    <div class="form-group">
       <label class="field-label">Payment Status</label>
       <div class="toggle">
         <button class="toggle-btn active" id="toggle-unpaid" onclick="setFormPaid(false)">Unpaid</button>
@@ -255,7 +298,10 @@
       <label class="field-label">Notes <span class="optional">(optional)</span></label>
       <textarea id="form-notes" placeholder="Session notes, goals, observations..." rows="4"></textarea>
     </div>
-    <button class="btn-primary-full" onclick="saveSession()">Save Session</button>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn-primary-full" style="margin-top:0" onclick="saveSession(false)">Save Session</button>
+      <button class="btn-outline-blue" style="margin-top:0;flex-shrink:0;width:auto;padding:15px 18px;font-size:14px" onclick="repeatLastSession()">Repeat Last</button>
+    </div>
   </main>
  
   <!-- DETAIL VIEW -->
@@ -272,6 +318,10 @@
         <span class="detail-label">Student</span>
         <span class="detail-value" id="detail-student"></span>
       </div>
+      <div class="detail-row" id="detail-duration-row">
+        <span class="detail-label">Duration</span>
+        <span class="detail-value" id="detail-duration"></span>
+      </div>
       <div class="detail-row">
         <span class="detail-label">Session Fee</span>
         <span class="detail-value" id="detail-amount" style="font-weight:700"></span>
@@ -284,12 +334,14 @@
         <span class="detail-label">Total</span>
         <span class="detail-value" id="detail-total" style="font-weight:700;font-size:17px"></span>
       </div>
-      <!-- Cancellation reason -->
+      <div class="detail-row" id="detail-mileage-row">
+        <span class="detail-label">Mileage</span>
+        <span class="detail-value" id="detail-mileage"></span>
+      </div>
       <div class="detail-notes hidden" id="detail-cancel-section">
         <p class="detail-label">Cancellation Reason</p>
         <p class="cancellation-reason" id="detail-cancel-reason"></p>
       </div>
-      <!-- Notes -->
       <div class="detail-notes" id="detail-notes-section">
         <div class="notes-header">
           <p class="detail-label" style="margin-bottom:0">Notes</p>
@@ -303,10 +355,36 @@
         </div>
       </div>
     </div>
- 
-    <!-- Action buttons rendered dynamically -->
     <div id="detail-actions"></div>
     <button class="btn-danger" onclick="deleteSession()">Delete Session</button>
+  </main>
+ 
+  <!-- STATS VIEW -->
+  <main id="view-stats" class="hidden">
+    <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px">Stats &amp; Summary</h2>
+ 
+    <!-- Year summary -->
+    <div class="stats-section" id="year-summary"></div>
+ 
+    <!-- Monthly breakdown -->
+    <div class="stats-section">
+      <p class="stats-title">Monthly Breakdown</p>
+      <div id="monthly-breakdown"></div>
+    </div>
+ 
+    <!-- Data management -->
+    <div class="stats-section">
+      <p class="stats-title">Data &amp; Backup</p>
+      <p style="font-size:13px;color:#8A7968;line-height:1.5;margin-bottom:14px">Export a backup before updating the app. Your data lives in Safari's local storage and is safe across code updates, but a backup gives you peace of mind.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button onclick="exportBackup()" style="width:100%;padding:13px;background:#2D4A3E;color:#A8D5B5;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">⬇ Export Backup (.json)</button>
+        <label style="width:100%;padding:13px;background:none;color:#1E40AF;border:2px solid #93C5FD;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;display:block;">
+          ⬆ Import Backup
+          <input type="file" accept=".json" id="import-file-input" style="display:none" onchange="importBackup(event)" />
+        </label>
+        <button onclick="exportCSV()" style="width:100%;padding:13px;background:none;color:#6B5E4F;border:2px solid #D9D0C4;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">Export CSV (spreadsheet)</button>
+      </div>
+    </div>
   </main>
  
 </div>
@@ -320,6 +398,17 @@
   let currentFilter = 'all';
   let selectedId = null;
   let formPaid = false;
+ 
+  // --- STATUS HELPER ---
+  // A session can be: upcoming, complete (not paid), paid, cancelled
+  function getStatus(s) {
+    if (s.cancelled) return 'cancelled';
+    if (s.upcoming) return 'upcoming'; // manually flagged as upcoming (scheduled in future)
+    if (s.paid) return 'paid';
+    // Auto-detect: if datetime is in the future and not marked complete, treat as upcoming
+    if (!s.complete && new Date(s.datetime) > new Date()) return 'upcoming';
+    return 'unpaid'; // complete but not paid
+  }
  
   function init() {
     try {
@@ -337,32 +426,57 @@
  
   // --- VIEWS ---
   function showView(name) {
-    ['dashboard','add','detail'].forEach(v => {
+    ['dashboard','add','detail','stats'].forEach(v => {
       document.getElementById('view-' + v).classList.toggle('hidden', v !== name);
     });
     const isBack = name !== 'dashboard';
     document.getElementById('header-logo').classList.toggle('hidden', isBack);
     document.getElementById('back-btn').classList.toggle('hidden', !isBack);
+    document.getElementById('header-right').classList.toggle('hidden', isBack);
+    if (name === 'stats') renderStats();
   }
  
-  function goBack() { showView('dashboard'); renderDashboard(); }
+  function goBack() { renderDashboard(); }
  
   // --- DASHBOARD ---
   function renderDashboard() {
     showView('dashboard');
-    // Exclude cancelled from totals
-    const collected = sessions.filter(s => s.paid && !s.cancelled)
+ 
+    const activeSessions = sessions.filter(s => !s.cancelled);
+    const completeSessions = activeSessions.filter(s => getStatus(s) !== 'upcoming');
+ 
+    const collected = completeSessions.filter(s => s.paid)
       .reduce((a, s) => a + parseFloat(s.amount || 0) + parseFloat(s.tip || 0), 0);
-    const outstanding = sessions.filter(s => !s.paid && !s.cancelled)
+    const outstanding = completeSessions.filter(s => !s.paid)
       .reduce((a, s) => a + parseFloat(s.amount || 0), 0);
-    document.getElementById('total-collected').textContent = fmt(collected);
-    document.getElementById('total-outstanding').textContent = fmt(outstanding);
+    const upcomingCount = sessions.filter(s => getStatus(s) === 'upcoming').length;
+    const totalSessions = completeSessions.length;
+ 
+    // Cards
+    document.getElementById('summary-cards').innerHTML = `
+      <div class="card card-green">
+        <p class="card-label">Collected</p>
+        <p class="card-amount">${fmt(collected)}</p>
+        <p class="card-sub">${completeSessions.filter(s=>s.paid).length} sessions</p>
+      </div>
+      <div class="card card-amber">
+        <p class="card-label">Outstanding</p>
+        <p class="card-amount">${fmt(outstanding)}</p>
+        <p class="card-sub">${completeSessions.filter(s=>!s.paid).length} unpaid</p>
+      </div>
+      <div class="card card-blue" style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:12px 14px">
+        <div><p class="card-label">Total Sessions</p><p class="card-amount" style="font-size:18px">${totalSessions} completed</p></div>
+        <div style="text-align:right"><p class="card-label">Upcoming</p><p class="card-amount" style="font-size:18px">${upcomingCount} scheduled</p></div>
+      </div>
+    `;
  
     const filtered = sessions.filter(s => {
-      if (currentFilter === 'all') return !s.cancelled;
-      if (currentFilter === 'paid') return s.paid && !s.cancelled;
-      if (currentFilter === 'unpaid') return !s.paid && !s.cancelled;
-      if (currentFilter === 'cancelled') return s.cancelled;
+      const st = getStatus(s);
+      if (currentFilter === 'all') return st !== 'cancelled';
+      if (currentFilter === 'upcoming') return st === 'upcoming';
+      if (currentFilter === 'unpaid') return st === 'unpaid';
+      if (currentFilter === 'paid') return st === 'paid';
+      if (currentFilter === 'cancelled') return st === 'cancelled';
       return true;
     });
  
@@ -374,36 +488,61 @@
       empty.classList.remove('hidden');
     } else {
       empty.classList.add('hidden');
-      list.innerHTML = filtered.map(s => {
-        const isCancelled = s.cancelled;
-        const badgeClass = isCancelled ? 'badge-cancelled' : (s.paid ? 'badge-paid' : 'badge-unpaid');
-        const badgeText = isCancelled ? 'Cancelled' : (s.paid ? 'Paid' : 'Unpaid');
-        const tip = parseFloat(s.tip || 0);
-        const amountDisplay = isCancelled
-          ? `<p class="row-amount cancelled">${fmt(s.amount)}</p>`
-          : `<p class="row-amount">${fmt(parseFloat(s.amount||0) + tip)}</p>`;
-        const snippet = isCancelled && s.cancelReason
-          ? `<p class="row-note">Cancelled: ${esc(s.cancelReason.slice(0,50))}${s.cancelReason.length>50?'…':''}</p>`
-          : (s.notes ? `<p class="row-note">${esc(s.notes.slice(0,60))}${s.notes.length>60?'…':''}</p>` : '');
-        return `
-          <div class="session-row${isCancelled?' cancelled':''}" onclick="openDetail('${s.id}')">
-            <div class="row-left">
-              <p class="row-date">${fmtDate(s.datetime)}</p>
-              <p class="row-time">${fmtTime(s.datetime)}${s.student ? ' · ' + esc(s.student) : ''}</p>
-              ${snippet}
-            </div>
-            <div class="row-right">
-              ${amountDisplay}
-              <span class="badge ${badgeClass}">${badgeText}</span>
-            </div>
-          </div>`;
-      }).join('');
+ 
+      // Group upcoming vs past when showing "all"
+      let html = '';
+      if (currentFilter === 'all') {
+        const upcoming = filtered.filter(s => getStatus(s) === 'upcoming');
+        const past = filtered.filter(s => getStatus(s) !== 'upcoming');
+        if (upcoming.length > 0) {
+          html += `<p class="list-section-header">Upcoming</p>`;
+          html += upcoming.map(s => sessionRowHTML(s)).join('');
+        }
+        if (past.length > 0) {
+          if (upcoming.length > 0) html += `<p class="list-section-header" style="margin-top:8px">Past Sessions</p>`;
+          html += past.map(s => sessionRowHTML(s)).join('');
+        }
+      } else {
+        html = filtered.map(s => sessionRowHTML(s)).join('');
+      }
+ 
+      list.innerHTML = html;
     }
+  }
+ 
+  function sessionRowHTML(s) {
+    const st = getStatus(s);
+    const badgeMap = { paid: ['badge-paid','Paid'], unpaid: ['badge-unpaid','Unpaid'], upcoming: ['badge-upcoming','Upcoming'], cancelled: ['badge-cancelled','Cancelled'] };
+    const [badgeClass, badgeText] = badgeMap[st] || ['badge-unpaid','Unpaid'];
+    const rowClass = st === 'cancelled' ? ' cancelled' : st === 'upcoming' ? ' upcoming' : '';
+    const tip = parseFloat(s.tip || 0);
+    const amountClass = st === 'cancelled' ? ' cancelled' : st === 'upcoming' ? ' upcoming' : '';
+    const amountDisplay = st === 'upcoming'
+      ? `<p class="row-amount upcoming">${fmt(s.amount)}</p>`
+      : st === 'cancelled'
+      ? `<p class="row-amount cancelled">${fmt(s.amount)}</p>`
+      : `<p class="row-amount">${fmt(parseFloat(s.amount||0)+tip)}</p>`;
+    const snippet = st === 'cancelled' && s.cancelReason
+      ? `<p class="row-note">Cancelled: ${esc(s.cancelReason.slice(0,50))}${s.cancelReason.length>50?'…':''}</p>`
+      : s.notes ? `<p class="row-note">${esc(s.notes.slice(0,60))}${s.notes.length>60?'…':''}</p>` : '';
+    const durationStr = s.duration ? ` · ${s.duration}min` : '';
+    return `
+      <div class="session-row${rowClass}" onclick="openDetail('${s.id}')">
+        <div class="row-left">
+          <p class="row-date">${fmtDate(s.datetime)}</p>
+          <p class="row-time">${fmtTime(s.datetime)}${s.student?' · '+esc(s.student):''}${durationStr}</p>
+          ${snippet}
+        </div>
+        <div class="row-right">
+          ${amountDisplay}
+          <span class="badge ${badgeClass}">${badgeText}</span>
+        </div>
+      </div>`;
   }
  
   function setFilter(f) {
     currentFilter = f;
-    ['all','unpaid','paid','cancelled'].forEach(t => {
+    ['all','upcoming','unpaid','paid','cancelled'].forEach(t => {
       document.getElementById('tab-' + t).classList.toggle('active', t === f);
     });
     renderDashboard();
@@ -413,11 +552,27 @@
   function openAdd() {
     document.getElementById('form-datetime').value = nowISO();
     document.getElementById('form-student').value = '';
+    document.getElementById('form-duration').value = '';
     document.getElementById('form-amount').value = rate || '';
     document.getElementById('form-tip').value = '';
+    document.getElementById('form-mileage').value = '';
     document.getElementById('form-notes').value = '';
     setFormPaid(false);
     showView('add');
+  }
+ 
+  function repeatLastSession() {
+    const last = sessions.find(s => !s.cancelled);
+    if (!last) { showToast('No previous session found.'); return; }
+    document.getElementById('form-datetime').value = nowISO();
+    document.getElementById('form-student').value = last.student || '';
+    document.getElementById('form-duration').value = last.duration || '';
+    document.getElementById('form-amount').value = last.amount || rate || '';
+    document.getElementById('form-tip').value = '';
+    document.getElementById('form-mileage').value = last.mileage || '';
+    document.getElementById('form-notes').value = '';
+    setFormPaid(false);
+    showToast('Pre-filled from last session!');
   }
  
   function setFormPaid(val) {
@@ -430,13 +585,17 @@
     const datetime = document.getElementById('form-datetime').value;
     const amount = document.getElementById('form-amount').value;
     if (!datetime || !amount) { showToast('Date and amount are required.'); return; }
+    const isUpcoming = new Date(datetime) > new Date();
     const session = {
       id: Date.now().toString(),
       datetime,
       student: document.getElementById('form-student').value,
+      duration: document.getElementById('form-duration').value,
       amount,
       tip: document.getElementById('form-tip').value || '',
+      mileage: document.getElementById('form-mileage').value || '',
       paid: formPaid,
+      complete: !isUpcoming || formPaid, // past sessions are auto-complete
       cancelled: false,
       cancelReason: '',
       notes: document.getElementById('form-notes').value
@@ -452,86 +611,86 @@
     selectedId = id;
     const s = sessions.find(x => x.id === id);
     if (!s) return;
+    const st = getStatus(s);
  
     document.getElementById('detail-date').textContent = fmtDate(s.datetime);
     document.getElementById('detail-time').textContent = fmtTime(s.datetime);
     document.getElementById('detail-amount').textContent = fmt(s.amount);
  
-    // Tip row
+    // Duration
+    const durRow = document.getElementById('detail-duration-row');
+    if (s.duration) { durRow.classList.remove('hidden'); document.getElementById('detail-duration').textContent = s.duration + ' min'; }
+    else durRow.classList.add('hidden');
+ 
+    // Tip & total
     const tip = parseFloat(s.tip || 0);
     const tipRow = document.getElementById('detail-tip-row');
     const totalRow = document.getElementById('detail-total-row');
     if (tip > 0) {
-      tipRow.classList.remove('hidden');
-      document.getElementById('detail-tip').textContent = fmt(tip);
-      totalRow.classList.remove('hidden');
-      document.getElementById('detail-total').textContent = fmt(parseFloat(s.amount||0) + tip);
-    } else {
-      tipRow.classList.add('hidden');
-      totalRow.classList.add('hidden');
-    }
+      tipRow.classList.remove('hidden'); document.getElementById('detail-tip').textContent = fmt(tip);
+      totalRow.classList.remove('hidden'); document.getElementById('detail-total').textContent = fmt(parseFloat(s.amount||0)+tip);
+    } else { tipRow.classList.add('hidden'); totalRow.classList.add('hidden'); }
+ 
+    // Mileage
+    const milRow = document.getElementById('detail-mileage-row');
+    if (s.mileage) { milRow.classList.remove('hidden'); document.getElementById('detail-mileage').textContent = s.mileage + ' mi'; }
+    else milRow.classList.add('hidden');
  
     // Badge
     const badge = document.getElementById('detail-badge');
-    if (s.cancelled) {
-      badge.textContent = 'Cancelled'; badge.className = 'badge badge-cancelled';
-    } else if (s.paid) {
-      badge.textContent = 'Paid'; badge.className = 'badge badge-paid';
-    } else {
-      badge.textContent = 'Unpaid'; badge.className = 'badge badge-unpaid';
-    }
+    const badgeMap = { paid:['badge-paid','Paid'], unpaid:['badge-unpaid','Unpaid'], upcoming:['badge-upcoming','Upcoming'], cancelled:['badge-cancelled','Cancelled'] };
+    const [bc, bt] = badgeMap[st] || ['badge-unpaid','Unpaid'];
+    badge.className = 'badge ' + bc; badge.textContent = bt;
  
     // Card style
-    document.getElementById('detail-card').className = 'detail-card' + (s.cancelled ? ' cancelled' : '');
+    const dc = document.getElementById('detail-card');
+    dc.className = 'detail-card' + (st==='cancelled'?' cancelled':st==='upcoming'?' upcoming':'');
  
     // Student
     const studentRow = document.getElementById('detail-student-row');
-    if (s.student) {
-      studentRow.classList.remove('hidden');
-      document.getElementById('detail-student').textContent = s.student;
-    } else {
-      studentRow.classList.add('hidden');
-    }
+    if (s.student) { studentRow.classList.remove('hidden'); document.getElementById('detail-student').textContent = s.student; }
+    else studentRow.classList.add('hidden');
  
-    // Cancellation reason
+    // Cancel reason
     const cancelSection = document.getElementById('detail-cancel-section');
-    if (s.cancelled) {
-      cancelSection.classList.remove('hidden');
-      document.getElementById('detail-cancel-reason').textContent = s.cancelReason || 'No reason provided.';
-    } else {
-      cancelSection.classList.add('hidden');
-    }
+    if (s.cancelled) { cancelSection.classList.remove('hidden'); document.getElementById('detail-cancel-reason').textContent = s.cancelReason || 'No reason provided.'; }
+    else cancelSection.classList.add('hidden');
  
     // Notes
     const notesText = document.getElementById('detail-notes');
     const notesEmpty = document.getElementById('detail-notes-empty');
     const notesEditArea = document.getElementById('notes-edit-area');
     const editBtn = document.getElementById('edit-notes-btn');
-    notesEditArea.classList.add('hidden');
-    editBtn.textContent = 'Edit';
-    if (s.notes) {
-      notesText.textContent = s.notes;
-      notesText.classList.remove('hidden');
-      notesEmpty.classList.add('hidden');
-    } else {
-      notesText.classList.add('hidden');
-      notesEmpty.classList.remove('hidden');
-    }
+    notesEditArea.classList.add('hidden'); editBtn.textContent = 'Edit';
+    if (s.notes) { notesText.textContent = s.notes; notesText.classList.remove('hidden'); notesEmpty.classList.add('hidden'); }
+    else { notesText.classList.add('hidden'); notesEmpty.classList.remove('hidden'); }
  
-    // Action buttons
+    // Actions
     const actions = document.getElementById('detail-actions');
-    if (s.cancelled) {
+    if (st === 'cancelled') {
       actions.innerHTML = `<button class="btn-outline-green" onclick="reinstateSession()">Reinstate Session</button>`;
+    } else if (st === 'upcoming') {
+      actions.innerHTML = `
+        <button class="btn-purple-full" onclick="markComplete()">✓ Mark Session Complete</button>
+        <button class="btn-outline-red" onclick="openCancelModal()">Mark as Cancelled</button>`;
     } else {
       const paidLabel = s.paid ? 'Mark as Unpaid' : 'Mark as Paid ✓';
       const paidClass = s.paid ? 'btn-outline-amber' : 'btn-primary-full';
       actions.innerHTML = `
         <button class="${paidClass}" onclick="toggleDetailPaid()">${paidLabel}</button>
-        <button class="btn-outline-red" onclick="openCancelModal()">Mark as Cancelled</button>
-      `;
+        <button class="btn-outline-red" onclick="openCancelModal()">Mark as Cancelled</button>`;
     }
  
     showView('detail');
+  }
+ 
+  function markComplete() {
+    const idx = sessions.findIndex(s => s.id === selectedId);
+    if (idx === -1) return;
+    sessions[idx].complete = true;
+    save();
+    showToast('Session marked complete!');
+    openDetail(selectedId);
   }
  
   // --- NOTES ---
@@ -539,14 +698,11 @@
     const editArea = document.getElementById('notes-edit-area');
     const editBtn = document.getElementById('edit-notes-btn');
     const isEditing = !editArea.classList.contains('hidden');
-    if (isEditing) {
-      editArea.classList.add('hidden');
-      editBtn.textContent = 'Edit';
-    } else {
+    if (isEditing) { editArea.classList.add('hidden'); editBtn.textContent = 'Edit'; }
+    else {
       const s = sessions.find(x => x.id === selectedId);
       document.getElementById('notes-edit-input').value = s ? (s.notes || '') : '';
-      editArea.classList.remove('hidden');
-      editBtn.textContent = 'Cancel';
+      editArea.classList.remove('hidden'); editBtn.textContent = 'Cancel';
       setTimeout(() => document.getElementById('notes-edit-input').focus(), 50);
     }
   }
@@ -555,22 +711,17 @@
     const idx = sessions.findIndex(s => s.id === selectedId);
     if (idx === -1) return;
     sessions[idx].notes = document.getElementById('notes-edit-input').value.trim();
-    save();
-    showToast('Notes saved!');
-    openDetail(selectedId);
+    save(); showToast('Notes saved!'); openDetail(selectedId);
   }
  
-  // --- PAID TOGGLE ---
   function toggleDetailPaid() {
     const idx = sessions.findIndex(s => s.id === selectedId);
     if (idx === -1) return;
     sessions[idx].paid = !sessions[idx].paid;
-    save();
-    showToast(sessions[idx].paid ? 'Marked paid!' : 'Marked unpaid.');
-    openDetail(selectedId);
+    if (sessions[idx].paid) sessions[idx].complete = true;
+    save(); showToast(sessions[idx].paid ? 'Marked paid!' : 'Marked unpaid.'); openDetail(selectedId);
   }
  
-  // --- CANCEL ---
   function openCancelModal() {
     document.getElementById('cancel-reason-input').value = '';
     document.getElementById('cancel-modal').classList.remove('hidden');
@@ -580,30 +731,74 @@
   function confirmCancel() {
     const idx = sessions.findIndex(s => s.id === selectedId);
     if (idx === -1) return;
-    sessions[idx].cancelled = true;
-    sessions[idx].paid = false;
+    sessions[idx].cancelled = true; sessions[idx].paid = false;
     sessions[idx].cancelReason = document.getElementById('cancel-reason-input').value.trim();
-    save();
-    closeCancelModal();
-    showToast('Session marked as cancelled.');
-    openDetail(selectedId);
+    save(); closeCancelModal(); showToast('Session marked as cancelled.'); openDetail(selectedId);
   }
   function reinstateSession() {
     const idx = sessions.findIndex(s => s.id === selectedId);
     if (idx === -1) return;
-    sessions[idx].cancelled = false;
-    sessions[idx].cancelReason = '';
-    save();
-    showToast('Session reinstated!');
-    openDetail(selectedId);
+    sessions[idx].cancelled = false; sessions[idx].cancelReason = '';
+    save(); showToast('Session reinstated!'); openDetail(selectedId);
   }
- 
-  // --- DELETE ---
   function deleteSession() {
     sessions = sessions.filter(s => s.id !== selectedId);
-    save();
-    showToast('Session deleted.');
-    renderDashboard();
+    save(); showToast('Session deleted.'); renderDashboard();
+  }
+ 
+  // --- STATS ---
+  function renderStats() {
+    const year = new Date().getFullYear();
+    const yearSessions = sessions.filter(s => !s.cancelled && new Date(s.datetime).getFullYear() === year);
+    const completed = yearSessions.filter(s => getStatus(s) !== 'upcoming');
+    const totalEarned = completed.filter(s=>s.paid).reduce((a,s)=>a+parseFloat(s.amount||0)+parseFloat(s.tip||0),0);
+    const totalTips = completed.filter(s=>s.paid).reduce((a,s)=>a+parseFloat(s.tip||0),0);
+    const totalMiles = sessions.filter(s=>s.mileage).reduce((a,s)=>a+parseFloat(s.mileage||0),0);
+    const cancelledCount = sessions.filter(s=>s.cancelled && new Date(s.datetime).getFullYear()===year).length;
+    const upcomingCount = sessions.filter(s=>getStatus(s)==='upcoming').length;
+    const overdueCount = sessions.filter(s=>getStatus(s)==='unpaid' && 
+      (new Date() - new Date(s.datetime)) > 7*24*60*60*1000).length;
+ 
+    document.getElementById('year-summary').innerHTML = `
+      <p class="stats-title">${year} Year to Date</p>
+      <div class="stats-row"><span class="stats-label">Total Earned (paid)</span><span class="stats-value">${fmt(totalEarned)}</span></div>
+      <div class="stats-row"><span class="stats-label">Completed Sessions</span><span class="stats-value">${completed.length}</span></div>
+      <div class="stats-row"><span class="stats-label">Tips Collected</span><span class="stats-value">${fmt(totalTips)}</span></div>
+      <div class="stats-row"><span class="stats-label">Upcoming Sessions</span><span class="stats-value">${upcomingCount}</span></div>
+      <div class="stats-row"><span class="stats-label">Cancellations</span><span class="stats-value">${cancelledCount}</span></div>
+      ${overdueCount > 0 ? `<div class="stats-row"><span class="stats-label" style="color:#9B2C2C">⚠ Unpaid 7+ days</span><span class="stats-value" style="color:#9B2C2C">${overdueCount}</span></div>` : ''}
+      ${totalMiles > 0 ? `<div class="stats-row"><span class="stats-label">Total Mileage</span><span class="stats-value">${totalMiles.toFixed(1)} mi</span></div>` : ''}
+    `;
+ 
+    // Monthly breakdown
+    const byMonth = {};
+    sessions.filter(s => !s.cancelled && getStatus(s) !== 'upcoming').forEach(s => {
+      const d = new Date(s.datetime);
+      const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+      if (!byMonth[key]) byMonth[key] = { sessions:0, earned:0, tips:0, miles:0 };
+      byMonth[key].sessions++;
+      if (s.paid) { byMonth[key].earned += parseFloat(s.amount||0)+parseFloat(s.tip||0); byMonth[key].tips += parseFloat(s.tip||0); }
+      byMonth[key].miles += parseFloat(s.mileage||0);
+    });
+ 
+    const sortedMonths = Object.keys(byMonth).sort().reverse();
+    if (sortedMonths.length === 0) {
+      document.getElementById('monthly-breakdown').innerHTML = '<p style="color:#B0A090;font-size:14px;font-style:italic">No completed sessions yet.</p>';
+      return;
+    }
+ 
+    document.getElementById('monthly-breakdown').innerHTML = sortedMonths.map(key => {
+      const [yr, mo] = key.split('-');
+      const label = new Date(parseInt(yr), parseInt(mo)-1, 1).toLocaleDateString('en-US', { month:'long', year:'numeric' });
+      const m = byMonth[key];
+      return `<div class="month-block">
+        <p class="month-header">${label}</p>
+        <div class="month-stat-row"><span>Sessions</span><span class="month-stat-value">${m.sessions}</span></div>
+        <div class="month-stat-row"><span>Earned (paid)</span><span class="month-stat-value">${fmt(m.earned)}</span></div>
+        ${m.tips > 0 ? `<div class="month-stat-row"><span>Tips</span><span class="month-stat-value">${fmt(m.tips)}</span></div>` : ''}
+        ${m.miles > 0 ? `<div class="month-stat-row"><span>Mileage</span><span class="month-stat-value">${m.miles.toFixed(1)} mi</span></div>` : ''}
+      </div>`;
+    }).join('');
   }
  
   // --- RATE ---
@@ -616,46 +811,95 @@
   function saveRate() {
     rate = document.getElementById('rate-input').value;
     try { localStorage.setItem(RATE_KEY, rate); } catch(e) {}
-    updateRateChip();
-    closeRateModal();
-    showToast('Rate updated!');
+    updateRateChip(); closeRateModal(); showToast('Rate updated!');
   }
   function updateRateChip() {
     document.getElementById('rate-chip').textContent = rate ? '$' + rate + '/hr' : 'Set rate';
+  }
+ 
+  // --- EXPORT CSV ---
+  function exportCSV() {
+    if (sessions.length === 0) { showToast('No sessions to export.'); return; }
+    const headers = ['Date','Time','Student','Duration (min)','Session Fee','Tip','Total','Status','Mileage','Cancellation Reason','Notes'];
+    const rows = sessions.map(s => {
+      const tip = parseFloat(s.tip || 0);
+      const total = parseFloat(s.amount || 0) + tip;
+      const st = getStatus(s);
+      const statusLabel = st === 'upcoming' ? 'Upcoming' : st === 'paid' ? 'Paid' : st === 'cancelled' ? 'Cancelled' : 'Unpaid';
+      return [
+        fmtDate(s.datetime), fmtTime(s.datetime), s.student||'', s.duration||'',
+        parseFloat(s.amount||0).toFixed(2), tip.toFixed(2), total.toFixed(2),
+        statusLabel, s.mileage||'', s.cancelReason||'', s.notes||''
+      ].map(v => `"${String(v).replace(/"/g,'""')}"`).join(',');
+    });
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `tutoring-sessions-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV exported!');
+  }
+ 
+  // --- BACKUP & RESTORE ---
+  function exportBackup() {
+    if (sessions.length === 0) { showToast('No sessions to back up.'); return; }
+    const backup = { version: 1, exportedAt: new Date().toISOString(), rate, sessions };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `sessions-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Backup exported!');
+  }
+ 
+  function importBackup(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const backup = JSON.parse(e.target.result);
+        if (!backup.sessions || !Array.isArray(backup.sessions)) {
+          showToast('Invalid backup file.'); return;
+        }
+        const count = backup.sessions.length;
+        if (!confirm(`This will replace your current data with ${count} session${count!==1?'s':''} from the backup. Continue?`)) return;
+        sessions = backup.sessions;
+        if (backup.rate) { rate = backup.rate; updateRateChip(); try { localStorage.setItem(RATE_KEY, rate); } catch(e) {} }
+        save();
+        showToast(`Restored ${count} session${count!==1?'s':''}!`);
+        renderDashboard();
+      } catch(err) {
+        showToast('Could not read backup file.');
+      }
+    };
+    reader.readAsText(file);
+    // Reset input so same file can be re-selected if needed
+    event.target.value = '';
   }
  
   // --- TOAST ---
   let toastTimer;
   function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.remove('hidden');
-    t.style.animation = 'none';
-    void t.offsetWidth;
+    t.textContent = msg; t.classList.remove('hidden');
+    t.style.animation = 'none'; void t.offsetWidth;
     t.style.animation = 'fadeInOut 2.2s ease forwards';
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.add('hidden'), 2200);
   }
  
   // --- HELPERS ---
-  function fmt(val) {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(val) || 0);
-  }
-  function fmtDate(iso) {
-    if (!iso) return '';
-    return new Date(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-  }
-  function fmtTime(iso) {
-    if (!iso) return '';
-    return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-  }
-  function nowISO() {
-    const d = new Date(); d.setSeconds(0, 0);
-    return d.toISOString().slice(0,16);
-  }
-  function esc(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  function fmt(val) { return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(parseFloat(val)||0); }
+  function fmtDate(iso) { if(!iso) return ''; return new Date(iso).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}); }
+  function fmtTime(iso) { if(!iso) return ''; return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); }
+  function nowISO() { const d=new Date(); d.setSeconds(0,0); return d.toISOString().slice(0,16); }
+  function esc(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
  
   init();
 </script>
